@@ -1,12 +1,12 @@
 import paramiko
 
-HOST_NAME = 'example.com'
-PORT = 22
+HOST_NAME = '127.0.0.1'
 
-USER_NAME = 'user7'
-PASSWORD = 'passwd'
+USER_NAME = 'efe'
+PASSWORD = '741049160'
+PORT = 3022
 
-cmd = 'uname'
+cmd = 'hostname'
 
 client = paramiko.SSHClient()
 
@@ -16,7 +16,6 @@ client.connect(hostname=HOST_NAME, port=PORT, username=USER_NAME, password=PASSW
 (stdin, stdout, stderr) = client.exec_command(cmd)
 
 output = stdout.read()
-print(output)
 print(str(output, 'utf8'))
 
 client.close()
