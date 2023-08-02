@@ -1,3 +1,4 @@
+"""Module providing the SSH functionality."""
 import paramiko
 
 HOST_NAME = '127.0.0.1'
