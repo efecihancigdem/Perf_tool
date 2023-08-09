@@ -1,5 +1,5 @@
 """Module providing the SSH functionality."""
-import paramiko
+from paramiko import SSHClient, AuthenticationException, SSHException
 
 class Remote():
     """Remote Class"""
@@ -7,8 +7,7 @@ class Remote():
         """Function initng the object."""
         self.hostname = hostname
         self.port = 3022
-        self.ssh = paramiko.SSHClient()
-        return None
+        self.ssh = SSHClient()
 
     def connect(self, user_name : str, password : str) -> None:
         """Function creates ssh connection."""
@@ -18,9 +17,12 @@ class Remote():
                              port=self.port,
                              username=user_name,
                              password=password)
-        except:
-            print(f"Cannot establish conenction to {self.hostname}")
-        return None
+        except AuthenticationException:
+            print("Authentication failed, please verify your credentials")
+        except SSHException as ssh_exception:
+            print(f"Unable to establish SSH connection: {ssh_exception}")
+        finally:
+            self.ssh.close()
 
     def execute(self, command : str) -> tuple:
         """Function executes command over ssh connection."""
@@ -33,5 +35,3 @@ class Remote():
     def close_connection(self) -> None:
         """Function closes ssh connection."""
         self.ssh.close()
-        return None
-
