@@ -9,7 +9,7 @@ PORT = 3022
 COMMAND = 'ip address'
 
 #Remote execution
-linux1 = Remote(HOST_NAME , "Linux")
+linux1 = Remote(HOST_NAME)
 linux1.connect(USER_NAME,PASSWORD)
 output = linux1.execute(COMMAND)[1].read()
 print(str(output,'utf8'))
