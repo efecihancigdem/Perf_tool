@@ -1,20 +1,16 @@
-"""Module providing the SSH functionality."""
-import paramiko
+"""Remote class"""
+from src.remote import remote
 
+#Env Variables
 HOST_NAME = '127.0.0.1'
 USER_NAME = 'efe'
-PASSWORD = '741049160'
+PASSWORD = '5432154321'
 PORT = 3022
-COMMAND = 'hostname'
+COMMAND = 'ip address'
 
-client = paramiko.SSHClient()
-
-client.load_system_host_keys()
-client.connect(hostname=HOST_NAME, port=PORT, username=USER_NAME, password=PASSWORD)
-
-(stdin, stdout, stderr) = client.exec_command(COMMAND)
-
-output = stdout.read()
-print(str(output, 'utf8'))
-
-client.close()
+#Remote execution
+linux1 = remote(HOST_NAME , "Linux")
+linux1.connect(USER_NAME,PASSWORD)
+output = linux1.execute(COMMAND)[1].read()
+print(str(output,'utf8'))
+linux1.close_connection()
