@@ -1,5 +1,5 @@
 """Remote class"""
-from src.remote import remote
+from src.remote import Remote
 
 #Env Variables
 HOST_NAME = '127.0.0.1'
@@ -9,7 +9,7 @@ PORT = 3022
 COMMAND = 'ip address'
 
 #Remote execution
-linux1 = remote(HOST_NAME , "Linux")
+linux1 = Remote(HOST_NAME , "Linux")
 linux1.connect(USER_NAME,PASSWORD)
 output = linux1.execute(COMMAND)[1].read()
 print(str(output,'utf8'))
